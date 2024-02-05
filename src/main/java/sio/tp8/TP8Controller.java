@@ -22,8 +22,10 @@ public class TP8Controller implements Initializable {
     private ArrayList<Integer> lesNumerosDuJoueur;
     private ArrayList<Integer> lesNumerosDeLOrdinateur;
     private ArrayList<Integer> nbsEnCommuns;
+
 //    private int nbNumerosChoisisJoueur;
     Button btnSelect;
+
     @FXML
     private Button btn1Joueur;
     @FXML
@@ -84,17 +86,16 @@ public class TP8Controller implements Initializable {
     {
         // A vous de jouer
         btnSelect = (Button) event.getSource();
+        couleurBoutonJoueur(btnSelect);
 
         if (lesNumerosDuJoueur.size() < 4 &&
                 !nombreDejaChoisi(Integer.valueOf(btnSelect.getText()), lesNumerosDuJoueur))
         {
-            couleurBoutonJoueur(btnSelect);
             lesNumerosDuJoueur.add(Integer.valueOf(btnSelect.getText()));
         }
         else
         {
             lesNumerosDuJoueur.remove(Integer.valueOf(btnSelect.getText()));
-            btnSelect.setStyle("-fx-background-color: #14e8ff;");
         }
     }
 
@@ -188,7 +189,13 @@ public class TP8Controller implements Initializable {
     public void couleurBoutonJoueur(Button bouton)
     {
         // A vous de jouer
-        bouton.setStyle("-fx-background-color: #FCF805;");
+        if (lesNumerosDuJoueur.size() < 4 &&
+                !nombreDejaChoisi(Integer.valueOf(btnSelect.getText()), lesNumerosDuJoueur)) {
+            bouton.setStyle("-fx-background-color: #FCF805;");
+        }
+        else {
+            bouton.setStyle("-fx-background-color: #14e8ff;");
+        }
 
     }
 
