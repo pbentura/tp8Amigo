@@ -23,7 +23,6 @@ public class TP8Controller implements Initializable {
     private ArrayList<Integer> lesNumerosDeLOrdinateur;
     private ArrayList<Integer> nbsEnCommuns;
 
-//    private int nbNumerosChoisisJoueur;
     Button btnSelect;
 
     @FXML
@@ -86,8 +85,11 @@ public class TP8Controller implements Initializable {
     {
         // A vous de jouer
         btnSelect = (Button) event.getSource();
+
+        // Changer la couleur du numéro choisi
         couleurBoutonJoueur(btnSelect);
 
+        // Remplir la liste des numéros choisis
         if (lesNumerosDuJoueur.size() < 4 &&
                 !nombreDejaChoisi(Integer.valueOf(btnSelect.getText()), lesNumerosDuJoueur))
         {
@@ -99,22 +101,12 @@ public class TP8Controller implements Initializable {
         }
     }
 
-    public boolean nombreDejaChoisi(int valeur,ArrayList<Integer> uneListe)
-    {
-        boolean trouve = false;
-
-        // A vous de jouer
-        if (uneListe.contains(valeur))
-        {
-            trouve = true;
-        }
-        return  trouve;
-    }
-
     @FXML
     public void btnJouerClicked(Event event)
     {
         // A vous de jouer
+
+        // Initialiser la couleur des boutons
         for (Node node : grdOrdinateur.getChildren())
         {
             if (node instanceof Button)
@@ -124,10 +116,10 @@ public class TP8Controller implements Initializable {
             }
         }
 
+        // Tracer les numéros choisis par le joueur
         System.out.println("num joueur "+lesNumerosDuJoueur);
-//        System.out.println(nbNumerosChoisisJoueur);
 
-        if(lesNumerosDuJoueur.size() != 4)
+        if(lesNumerosDuJoueur.size() != 4) // S'il y'a moins de 4 numéros choisis, afficher un message
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nombre de numéros choisis");
@@ -139,6 +131,7 @@ public class TP8Controller implements Initializable {
         {
             lesNumerosDeLOrdinateur.clear();
 
+            // Choix des numéros de l'ordinateur, les mettre dans un tableau
             while (lesNumerosDeLOrdinateur.size() < 4)
             {
                 int nbOrdi = new Random().nextInt(9) + 1;
@@ -148,6 +141,7 @@ public class TP8Controller implements Initializable {
                 }
             }
 
+            // Remplir la liste des numéros en commun
             nbsEnCommuns.clear();
             if (nombreDejaChoisi(lesNumerosDuJoueur.get(0), lesNumerosDeLOrdinateur)){
                 nbsEnCommuns.add(lesNumerosDuJoueur.get(0));
@@ -162,13 +156,16 @@ public class TP8Controller implements Initializable {
                 nbsEnCommuns.add(lesNumerosDuJoueur.get(3));
             }
 
+            // Colorer les numéros choisits par l'ordinateur
             couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(0));
             couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(1));
             couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(2));
             couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(3));
 
+            // Afficher les numéros en commun
             lblNbCommuns.setText(nbsEnCommuns.toString());
 
+            // Tracer les numéros choisis par l'ordinateur
             System.out.println("num ordinateur "+lesNumerosDeLOrdinateur.toString());
         }
     }
@@ -177,11 +174,14 @@ public class TP8Controller implements Initializable {
     public void btnResetClicked(Event event)
     {
         // A vous de jouer
+
+        // Vider les listes et le label des numéros en commun
         lesNumerosDeLOrdinateur.clear();
         lesNumerosDuJoueur.clear();
         nbsEnCommuns.clear();
         lblNbCommuns.setText("");
 
+        // Initialiser la couleur des boutons
         for (Node node : grdJoueur.getChildren())
         {
             if (node instanceof Button)
@@ -198,6 +198,19 @@ public class TP8Controller implements Initializable {
                 button.setStyle("-fx-background-color: #fd86e5;");
             }
         }
+    }
+
+
+    public boolean nombreDejaChoisi(int valeur,ArrayList<Integer> uneListe)
+    {
+        boolean trouve = false;
+
+        // A vous de jouer
+        if (uneListe.contains(valeur))
+        {
+            trouve = true;
+        }
+        return  trouve;
     }
 
     public void couleurBoutonJoueur(Button bouton)
