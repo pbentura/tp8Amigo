@@ -153,6 +153,11 @@ public class TP8Controller implements Initializable {
                 nbsEnCommuns.add(lesNumerosDuJoueur.get(3));
             }
 
+            couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(0));
+            couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(1));
+            couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(2));
+            couleurBoutonOrdinateur(lesNumerosDeLOrdinateur.get(3));
+
             lblNbCommuns.setText(nbsEnCommuns.toString());
 
             System.out.println("num ordinateur "+lesNumerosDeLOrdinateur.toString());
@@ -190,10 +195,12 @@ public class TP8Controller implements Initializable {
     {
         // A vous de jouer
         if (lesNumerosDuJoueur.size() < 4 &&
-                !nombreDejaChoisi(Integer.valueOf(btnSelect.getText()), lesNumerosDuJoueur)) {
+                !nombreDejaChoisi(Integer.valueOf(btnSelect.getText()), lesNumerosDuJoueur))
+        {
             bouton.setStyle("-fx-background-color: #FCF805;");
         }
-        else {
+        else
+        {
             bouton.setStyle("-fx-background-color: #14e8ff;");
         }
 
@@ -202,6 +209,16 @@ public class TP8Controller implements Initializable {
     public void couleurBoutonOrdinateur(int valeur)
     {
         // A vous de jouer
-
+       for (Node node : grdOrdinateur.getChildren())
+        {
+            if (node instanceof Button)
+            {
+                Button button = (Button) node;
+                if (button.getText().equals(String.valueOf(valeur)))
+                {
+                    button.setStyle("-fx-background-color: lightgreen;");
+                }
+            }
+        }
     }
 }
