@@ -115,6 +115,15 @@ public class TP8Controller implements Initializable {
     public void btnJouerClicked(Event event)
     {
         // A vous de jouer
+        for (Node node : grdOrdinateur.getChildren())
+        {
+            if (node instanceof Button)
+            {
+                Button button = (Button) node;
+                button.setStyle("-fx-background-color: #fd86e5;");
+            }
+        }
+
         System.out.println("num joueur "+lesNumerosDuJoueur);
 //        System.out.println(nbNumerosChoisisJoueur);
 
